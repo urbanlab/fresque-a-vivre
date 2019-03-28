@@ -18,8 +18,11 @@ app.use( bodyParser.urlencoded({
 app.set( 'view engine', 'ejs' );
 
 app.post('/fileupload', function (req, res) { 
+  console.lo('GET /fileupload');
+  
   var form = new formidable.IncomingForm();
   form.parse(req, function (err, fields, files) {
+    console.log(files);
     var oldpath = files.filetoupload.path;
     var newpath = __dirname + '/uploads/' + files.filetoupload.name;
     fs.rename(oldpath, newpath, function (err) {
