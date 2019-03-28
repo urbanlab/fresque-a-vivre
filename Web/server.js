@@ -1,8 +1,20 @@
-var http = require('http');
+
+var app               = require('express')();
+var http              = require('http').Server(app);
+var io                = require('socket.io')(http);
+
 var formidable = require('formidable');
 var fs = require('fs');
 
-http.createServer(function (req, res) {
+
+app.use( serveStatic( __dirname + '/Web/' ) );
+app.use( bodyParser.urlencoded({
+  extended: true
+}));
+
+app.set( 'view engine', 'ejs' );
+
+app.get('/fileupload', function (req, res) { 
   if (req.url == '/fileupload') {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
@@ -13,7 +25,7 @@ http.createServer(function (req, res) {
         res.write('File uploaded and moved!');
         res.end();
       });
- });
+    });
   } else {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
@@ -22,4 +34,9 @@ http.createServer(function (req, res) {
     res.write('</form>');
     return res.end();
   }
-}).listen(6000);
+});
+
+
+http.listen(5050, function(){
+  console.log('Listening on *:5050');
+});
