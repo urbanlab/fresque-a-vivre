@@ -18,7 +18,7 @@ app.use( bodyParser.urlencoded({
 app.set( 'view engine', 'ejs' );
 
 app.post('/fileupload', function (req, res) { 
-  console.lo('GET /fileupload');
+  console.log('GET /fileupload');
   
   var form = new formidable.IncomingForm();
   form.parse(req, function (err, fields, files) {
