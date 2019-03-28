@@ -28,7 +28,7 @@ app.post('/fileupload', function (req, res) {
     console.log(fields);
     console.log(files);
     var oldpath = files.file.path;
-    var newpath = __dirname + '/uploads/' + file.file.name;
+    var newpath = __dirname + '/uploads/' + files.file.name;
     fs.rename(oldpath, newpath, function (err) {
       if (err) throw err;
       res.write('File uploaded and moved!');
