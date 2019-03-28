@@ -40,6 +40,6 @@ app.get('/', function(req, res) {
 })
 
 
-http.listen(5050, function(){
-  console.log('Listening on *:5050');
+http.listen(3000, function(){
+  console.log('Listening on *:3000');
 });
